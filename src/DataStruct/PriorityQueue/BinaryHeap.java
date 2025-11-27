@@ -38,35 +38,35 @@ public class BinaryHeap<T extends Comparable<T>> {
     // k: index
     private void swimMaxH(int k) {
         while (k > 1 && less(k/2, k)) {
-            swap(k, k/2);
+            exchange(k, k/2);
             k /= 2;
         }
     }
 
     private void swimMinH(int k) {
         while (k > 1 && less(k, k/2)) {
-            swap(k, k/2);
+            exchange(k, k/2);
             k /= 2;
         }
     }
 
     // parent value should be > its 2 child
     private void sinkMaxH(int k) {
-        while (2 * k < N) {
+        while (2 * k <= N) {
             int j = 2 * k;
-            if (less(j, j + 1)) j++;
+            if (j < N && less(j, j + 1)) j++;
             if (less(j, k)) break; // satisfied
-            swap(j, k);
+            exchange(j, k);
             k = j;
         }
     }
 
     private void sinkMinH(int k) {
-        while (2 * k < N) {
+        while (2 * k <= N) {
             int j = 2 * k;
-            if (less(j + 1, j)) j++;
+            if (j < N && less(j + 1, j)) j++;
             if (!less(j, k)) break; // satisfied
-            swap(j, k);
+            exchange(j, k);
             k = j;
         }
     }
@@ -74,7 +74,7 @@ public class BinaryHeap<T extends Comparable<T>> {
     // delete most significant element
     public T poll() {
         T r = data[1];
-        swap(1, N--);
+        exchange(1, N--);
 
         if(isMaxH) sinkMaxH(1);
         else sinkMinH(1);
@@ -103,7 +103,7 @@ public class BinaryHeap<T extends Comparable<T>> {
     }
 
     // helpers
-    void swap(int k1, int k2) {
+    void exchange(int k1, int k2) {
         T t = data[k1];
         data[k1] = data[k2];
         data[k2] = t;
