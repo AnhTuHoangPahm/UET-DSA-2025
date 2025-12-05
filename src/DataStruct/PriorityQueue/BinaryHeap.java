@@ -10,13 +10,11 @@ public class BinaryHeap<T extends Comparable<T>> {
     boolean isMaxH = true;
 
     public BinaryHeap() {
-        N = 0;
         CAPACITY = 4; // this is 1-indexed
         data = (T[]) new Comparable[5];
     }
 
     public BinaryHeap(int initialSize) {
-        N = 0;
         CAPACITY = initialSize;
         data = (T[]) new Comparable[initialSize+1];
     }

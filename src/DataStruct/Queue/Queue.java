@@ -1,7 +1,7 @@
 package DataStruct.Queue;
 import DataStruct.LinkedList.SinglyLinkedList;
 
-public class Queue<T extends Comparable<T>> {
+public class Queue<T> {
     protected final SinglyLinkedList<T> ll;
 
     public Queue() {
@@ -18,6 +18,10 @@ public class Queue<T extends Comparable<T>> {
             System.out.println("Empty queue!");
         }
         return removed;
+    }
+
+    public T peek() {
+        return ll.head.getData();
     }
 
     public boolean isEmpty() {

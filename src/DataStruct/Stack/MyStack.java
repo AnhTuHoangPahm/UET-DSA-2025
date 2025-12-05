@@ -5,21 +5,20 @@ import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.Iterator;
 
+@SuppressWarnings("unchecked")
 public class MyStack<T extends Comparable<T>> implements Iterable<T> {
     private T[] data;
     private int N; // index
     private int CAPACITY;
 
-    @SuppressWarnings("unchecked")
-    public MyStack(T defaultVal, int capacity) {
-        try {
-            if (defaultVal == null) throw new InvalidParameterException();
-            CAPACITY = capacity != 0 ? capacity : 1; // if creates empty MyStack
-            data = (T[]) Array.newInstance(defaultVal.getClass(), CAPACITY);
-            Arrays.fill(data, defaultVal);
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
+    public MyStack() {
+        CAPACITY = 4;
+        data = (T[]) new Comparable[CAPACITY];
+    }
+
+    public MyStack(int capacity) {
+        CAPACITY = capacity;
+        data = (T[]) new Comparable[CAPACITY];
     }
 
     public void push(T val) {
@@ -30,6 +29,10 @@ public class MyStack<T extends Comparable<T>> implements Iterable<T> {
     public T pop() {
         shrink();
         return data[--N];
+    }
+
+    public T peek() {
+        return data[N-1];
     }
 
     // utility
@@ -53,6 +56,10 @@ public class MyStack<T extends Comparable<T>> implements Iterable<T> {
             CAPACITY/=2;
             data = Arrays.copyOf(data, CAPACITY);
         }
+    }
+
+    public String toString() {
+        return Arrays.toString(data);
     }
 
     /**

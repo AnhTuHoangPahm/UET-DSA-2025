@@ -18,8 +18,8 @@ public class TwoStack {
     }
 
     public double Calculate(String expression) {
-        MyStack<Double> values = new MyStack<>(0.0, 2);
-        MyStack<String> operators = new MyStack<>("", 1);
+        MyStack<Double> values = new MyStack<>(2);
+        MyStack<String> operators = new MyStack<>(1);
 
         StringReader reader = new StringReader(expression);
 

@@ -1,31 +1,28 @@
 package Algorithm.Other;
 
+import DataStruct.PriorityQueue.BinaryHeap;
+
 //@SuppressWarnings("unchecked")
 public class HeapUtil {
-    public static int[] heapifyMaxH(int[] array) {
-        int N = array.length;
-        int[] arr = new int[N + 1];
-
-        System.arraycopy(array, 0, arr, 1, N);
-
-        for (int i = N / 2; i > 0; i--) {
-            int prev_i = i;
-            while (2 * i <= N) {
-                int j = 2 * i;
-                if (j < N && arr[j] < arr[j + 1]) j++;
-                if (arr[i] > arr[j]) break;
-                // exchange
-                int t = arr[i];
-                arr[i] = arr[j];
-                arr[j] = t;
-                i = j;
-            }
-            i = prev_i;
+    public static BinaryHeap<Integer> heapifyMaxH(int[] arr) {
+        int N = arr.length;
+        BinaryHeap<Integer> bh = new BinaryHeap<>(N);
+        for (int i : arr) {
+            bh.add(i);
         }
-        return arr;
+        return bh;
     }
 
+    // use a MaxHeap
     public static int[] HeapSort(int[] arr) {
-        return new int[]{0};
+        int N = arr.length;
+        // first, heapify the array
+        BinaryHeap<Integer> temp = heapifyMaxH(arr);
+        // secondly, poll elements in turn & put into a new array
+        int[] res = new int[N];
+        for (int i = N-1; i >=0; i--) {
+            res[i] = temp.poll();
+        }
+        return res;
     }
 }

@@ -1,5 +1,5 @@
 package DataStruct.Tree;
-// simple avl tree
+// avl tree is a BST that has the property to self-balance, avoiding the deformation of BST to a LinkedList
 public class AVLTree {
     static class Node {
         int data;
